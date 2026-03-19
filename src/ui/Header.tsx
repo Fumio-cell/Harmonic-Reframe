@@ -87,7 +87,7 @@ export const Header: React.FC = () => {
                 ) : (
                     <button onClick={login} className="login-btn">
                         <LogIn className="w-4 h-4" />
-                        Sign In
+                        Login
                     </button>
                 )}
             </div>
