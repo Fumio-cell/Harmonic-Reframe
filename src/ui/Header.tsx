@@ -64,7 +64,7 @@ export const Header: React.FC = () => {
                     <span className="toolkit-name">Poetic Signal Toolkit</span>
                 </div>
                 <div className="app-separator">/</div>
-                <div className="app-name">Harmonic Reframe v1.2</div>
+                <div className="app-name">Harmonic Reframe</div>
             </div>
 
             <div className="header-right">
@@ -98,13 +98,13 @@ export const Header: React.FC = () => {
                     justify-content: space-between;
                     align-items: center;
                     padding: 0.75rem 1.5rem;
-                    background: rgba(10, 10, 10, 0.8);
-                    backdrop-filter: blur(10px);
-                    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+                    background: rgba(15, 23, 42, 0.85);
+                    backdrop-filter: blur(12px);
+                    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
                     position: sticky;
                     top: 0;
                     z-index: 1000;
-                    font-family: 'Inter', sans-serif;
+                    font-family: 'Inter', system-ui, -apple-system, sans-serif;
                 }
                 .header-left, .header-right {
                     display: flex;
@@ -115,7 +115,7 @@ export const Header: React.FC = () => {
                     display: flex;
                     align-items: center;
                     gap: 0.5rem;
-                    color: #10b981;
+                    color: #38bdf8;
                 }
                 .brand-icon {
                     width: 1.25rem;
@@ -129,18 +129,19 @@ export const Header: React.FC = () => {
                 .app-separator {
                     color: rgba(255, 255, 255, 0.2);
                     font-weight: 300;
+                    margin: 0 0.25rem;
                 }
                 .app-name {
-                    color: rgba(255, 255, 255, 0.6);
-                    font-size: 0.9rem;
+                    color: rgba(255, 255, 255, 0.7);
+                    font-size: 0.95rem;
                     font-weight: 500;
                 }
                 .user-profile {
                     display: flex;
                     align-items: center;
                     gap: 0.75rem;
-                    background: rgba(255, 255, 255, 0.05);
-                    padding: 0.25rem 0.5rem 0.25rem 0.75rem;
+                    background: rgba(255, 255, 255, 0.06);
+                    padding: 0.35rem 0.5rem 0.35rem 0.75rem;
                     border-radius: 9999px;
                     border: 1px solid rgba(255, 255, 255, 0.1);
                 }
@@ -150,62 +151,73 @@ export const Header: React.FC = () => {
                     gap: 0.25rem;
                     font-size: 0.7rem;
                     font-weight: 800;
-                    padding: 0.1rem 0.4rem;
-                    border-radius: 4px;
-                    background: #27272a;
-                    color: #71717a;
+                    padding: 0.2rem 0.5rem;
+                    border-radius: 9999px;
+                    background: rgba(255, 255, 255, 0.1);
+                    color: #94a3b8;
+                    letter-spacing: 0.05em;
                 }
                 .pro-badge.active {
                     background: #f59e0b;
                     color: #fff;
+                    box-shadow: 0 0 10px rgba(245, 158, 11, 0.3);
                 }
                 .user-email {
-                    font-size: 0.8rem;
-                    color: rgba(255, 255, 255, 0.8);
+                    font-size: 0.85rem;
+                    color: rgba(255, 255, 255, 0.9);
+                    font-weight: 500;
+                    letter-spacing: 0.01em;
                 }
                 .upgrade-btn {
-                    background: #f59e0b;
+                    background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
                     color: #fff;
                     border: none;
-                    padding: 0.25rem 0.75rem;
+                    padding: 0.3rem 0.8rem;
                     border-radius: 9999px;
                     font-size: 0.75rem;
-                    font-weight: 600;
+                    font-weight: 700;
                     cursor: pointer;
-                    transition: all 0.2s;
+                    transition: all 0.2s ease;
+                    box-shadow: 0 2px 8px rgba(245, 158, 11, 0.25);
                 }
                 .upgrade-btn:hover {
-                    background: #d97706;
-                    transform: scale(1.05);
+                    transform: translateY(-1px);
+                    box-shadow: 0 4px 12px rgba(245, 158, 11, 0.4);
                 }
                 .login-btn {
                     display: flex;
                     align-items: center;
                     gap: 0.5rem;
                     background: #fff;
-                    color: #000;
+                    color: #0f172a;
                     border: none;
-                    padding: 0.4rem 1rem;
+                    padding: 0.5rem 1.25rem;
                     border-radius: 9999px;
                     font-size: 0.85rem;
                     font-weight: 600;
                     cursor: pointer;
-                    transition: all 0.2s;
+                    transition: all 0.2s ease;
+                    box-shadow: 0 2px 8px rgba(255, 255, 255, 0.1);
                 }
                 .login-btn:hover {
-                    background: #e4e4e7;
+                    background: #f8fafc;
+                    transform: translateY(-1px);
+                    box-shadow: 0 4px 12px rgba(255, 255, 255, 0.2);
                 }
                 .icon-btn {
                     background: none;
                     border: none;
-                    color: rgba(255, 255, 255, 0.4);
+                    color: rgba(255, 255, 255, 0.5);
                     cursor: pointer;
-                    padding: 0.25rem;
+                    padding: 0.4rem;
                     display: flex;
                     align-items: center;
+                    border-radius: 50%;
+                    transition: all 0.2s ease;
                 }
                 .icon-btn:hover {
                     color: #fff;
+                    background: rgba(255, 255, 255, 0.1);
                 }
             `}</style>
         </header>
