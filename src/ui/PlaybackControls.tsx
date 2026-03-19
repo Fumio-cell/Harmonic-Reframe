@@ -172,8 +172,8 @@ const PlaybackControls: React.FC<PlaybackControlsProps> = ({
     return (
         <div className="card fade-up">
             <div className="card-title">
-                <span className="icon">🎧</span> プレビュー再生
-                <span className="shortcut-hint">Space: 再生/停止 · Esc: 停止</span>
+                <span className="icon">🎧</span> Playback Preview
+                <span className="shortcut-hint">Space: Play/Pause · Esc: Stop</span>
             </div>
 
             {/* A/B Mode Switch */}
@@ -182,14 +182,14 @@ const PlaybackControls: React.FC<PlaybackControlsProps> = ({
                     className={`ab-btn ${mode === 'original' ? 'active' : ''}`}
                     onClick={() => switchMode('original')}
                 >
-                    🅰️ 原音
+                    🅰️ Original
                 </button>
                 <button
                     className={`ab-btn ${mode === 'converted' ? 'active' : ''}`}
                     onClick={() => switchMode('converted')}
                     disabled={!hasConverted}
                 >
-                    🅱️ 変換後
+                    🅱️ Converted
                 </button>
             </div>
 
@@ -209,13 +209,13 @@ const PlaybackControls: React.FC<PlaybackControlsProps> = ({
 
             {/* Transport Controls */}
             <div className="transport">
-                <button className="transport-btn" onClick={handleStop} title="停止 (Esc)">
+                <button className="transport-btn" onClick={handleStop} title="Stop (Esc)">
                     ⏹
                 </button>
                 <button
                     className={`transport-btn play-btn ${playing ? 'playing' : ''}`}
                     onClick={togglePlay}
-                    title="再生/一時停止 (Space)"
+                    title="Play/Pause (Space)"
                 >
                     {playing ? '⏸' : '▶'}
                 </button>
@@ -223,7 +223,7 @@ const PlaybackControls: React.FC<PlaybackControlsProps> = ({
 
             {!hasConverted && mode === 'original' && (
                 <div className="playback-hint">
-                    💡 「変換 → WAV保存」を実行すると、変換後の音声も再生できます
+                    💡 Once you "Run Conversion", you can preview the processed sound.
                 </div>
             )}
         </div>

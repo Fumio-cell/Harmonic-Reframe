@@ -44,7 +44,7 @@ const ExportButton: React.FC<ExportButtonProps> = ({
     return (
         <div className="card fade-up">
             <div className="card-title">
-                <span className="icon">💾</span> 出力 (Output)
+                <span className="icon">💾</span> Output
             </div>
 
             <div className="btn-group">
@@ -53,7 +53,7 @@ const ExportButton: React.FC<ExportButtonProps> = ({
                     onClick={onPreview}
                     disabled={!canExport}
                 >
-                    <Play className="w-4 h-4" /> 変換実行 (Preview)
+                    <Play className="w-4 h-4" /> Run Conversion
                 </button>
                 <button
                     className={`btn btn-primary pulse ${isGated ? 'gated-btn' : ''}`}
@@ -61,7 +61,7 @@ const ExportButton: React.FC<ExportButtonProps> = ({
                     disabled={!canExport}
                 >
                     {isGated ? <Zap className="w-4 h-4" /> : <Download className="w-4 h-4" />}
-                    {isGated ? 'Get PRO to Export Long File' : '💾 変換 → WAV保存'}
+                    {isGated ? 'Get PRO to Export Long File' : 'Save as WAV'}
                 </button>
             </div>
             {isGated && (

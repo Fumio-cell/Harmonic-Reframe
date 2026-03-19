@@ -23,7 +23,7 @@ const FileDropZone: React.FC<FileDropZoneProps> = ({
                 const buffer = await audioCtx.decodeAudioData(arrayBuffer);
                 onFileLoad(buffer, file.name);
             } catch {
-                alert('このファイル形式には対応していません。WAV / MP3 / AIFF をお試しください。');
+                alert('Unsupported file format. Please try WAV, MP3, AIFF, or M4A.');
             } finally {
                 audioCtx.close();
             }
@@ -67,8 +67,8 @@ const FileDropZone: React.FC<FileDropZoneProps> = ({
                 onDragOver={handleDragOver}
             >
                 <div className="drop-icon">🎶</div>
-                <div className="drop-title">音声ファイルをドロップ</div>
-                <div className="drop-sub">またはクリックして選択</div>
+                <div className="drop-title">Drop audio file here</div>
+                <div className="drop-sub">or click to browse</div>
                 <div className="formats">
                     <span className="format-tag">MP3</span>
                     <span className="format-tag">WAV</span>

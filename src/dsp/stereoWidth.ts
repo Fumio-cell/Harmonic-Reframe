@@ -1,13 +1,13 @@
 /**
- * Stereo Width - Mid/Side処理によるステレオ幅調整
+ * Stereo Width - Mid/Side processing for stereo width adjustment
  */
 
 /**
- * ステレオ幅を調整
- * @param left - 左チャンネル
- * @param right - 右チャンネル
- * @param width - 幅 (0=モノ, 1=原音, 1.5=拡張)
- * @returns [新left, 新right]
+ * Adjust stereo width
+ * @param left - Left channel
+ * @param right - Right channel
+ * @param width - Width (0=mono, 1=original, 1.5=expanded)
+ * @returns [newLeft, newRight]
  */
 export function adjustStereoWidth(
     left: Float32Array,

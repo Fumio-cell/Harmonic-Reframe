@@ -42,7 +42,7 @@ const EnhancerPanel: React.FC<EnhancerPanelProps> = ({
     return (
         <div className="card fade-up">
             <div className="card-title">
-                <span className="icon">🎛️</span> 音質向上 (Enhancer)
+                <span className="icon">🎛️</span> Enhancer
             </div>
 
             <div className="enhance-grid">

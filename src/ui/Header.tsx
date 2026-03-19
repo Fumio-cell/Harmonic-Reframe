@@ -7,10 +7,13 @@ export const Header: React.FC = () => {
     const [isPro, setIsPro] = useState(false);
 
     useEffect(() => {
-        supabase.auth.getUser().then(({ data: { user: foundUser } }) => {
+        const client = supabase;
+        if (!client) return;
+
+        client.auth.getUser().then(({ data: { user: foundUser } }) => {
             setUser(foundUser);
             if (foundUser) {
-                supabase
+                client
                     .from('profiles')
                     .select('is_pro')
                     .eq('id', foundUser.id)
@@ -23,11 +26,11 @@ export const Header: React.FC = () => {
             }
         });
 
-        const { data: authListener } = supabase.auth.onAuthStateChange(async (_event, session) => {
+        const { data: authListener } = client.auth.onAuthStateChange(async (_event, session) => {
             const currentUser = session?.user ?? null;
             setUser(currentUser);
             if (currentUser) {
-                const { data } = await supabase
+                const { data } = await client
                     .from('profiles')
                     .select('is_pro')
                     .eq('id', currentUser.id)
@@ -45,13 +48,13 @@ export const Header: React.FC = () => {
         window.addEventListener('app:buyPro', handleBuyPro);
 
         return () => {
-            authListener.subscription.unsubscribe();
+            authListener?.subscription.unsubscribe();
             window.removeEventListener('app:buyPro', handleBuyPro);
         };
     }, []);
 
-    const login = () => supabase.auth.signInWithOAuth({ provider: 'github' });
-    const logout = () => supabase.auth.signOut();
+    const login = () => supabase?.auth.signInWithOAuth({ provider: 'google', options: { redirectTo: window.location.origin } });
+    const logout = () => supabase?.auth.signOut();
 
     return (
         <header className="toolkit-header">

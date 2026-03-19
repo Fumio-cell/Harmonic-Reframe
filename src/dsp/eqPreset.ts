@@ -27,7 +27,7 @@ export const EQ_PRESETS: Record<EQPresetName, EQPreset> = {
     off: {
         name: 'off',
         label: 'OFF',
-        description: '変換のみ（音質調整なし）',
+        description: 'Conversion only (no enhancement)',
         bands: [],
         stereoWidth: 1.0,
         highPassHz: 0,
@@ -37,8 +37,8 @@ export const EQ_PRESETS: Record<EQPresetName, EQPreset> = {
     },
     natural: {
         name: 'natural',
-        label: 'ナチュラル',
-        description: 'ノーマライズ + 超低域カット。自然な音質改善',
+        label: 'Natural',
+        description: 'Normalization + Sub-bass cut. Subtle enhancement.',
         bands: [
             { type: 'peaking', freq: 3000, gain: 1.5, Q: 0.8 },
         ],
@@ -50,8 +50,8 @@ export const EQ_PRESETS: Record<EQPresetName, EQPreset> = {
     },
     clear: {
         name: 'clear',
-        label: 'クリア',
-        description: '高域を大幅ブースト。ボーカル・楽器の輪郭がくっきり',
+        label: 'Clear',
+        description: 'High-end boost. Sharpens vocals and instrument definition.',
         bands: [
             { type: 'peaking', freq: 2500, gain: 5.0, Q: 0.8 },
             { type: 'peaking', freq: 5000, gain: 4.0, Q: 0.7 },
@@ -67,8 +67,8 @@ export const EQ_PRESETS: Record<EQPresetName, EQPreset> = {
     },
     warm: {
         name: 'warm',
-        label: 'ウォーム',
-        description: '低域を豊かにブースト。432Hzと相性◎の温かいサウンド',
+        label: 'Warm',
+        description: 'Rich low-end boost. Cozy sound perfect for 432Hz.',
         bands: [
             { type: 'lowshelf', freq: 200, gain: 6.0, Q: 0.7 },
             { type: 'peaking', freq: 500, gain: 3.0, Q: 0.8 },
@@ -84,8 +84,8 @@ export const EQ_PRESETS: Record<EQPresetName, EQPreset> = {
     },
     wide: {
         name: 'wide',
-        label: 'ワイド',
-        description: 'ステレオ空間を大きく拡張。包み込まれるような立体感',
+        label: 'Wide',
+        description: 'Significant stereo expansion. Immersive 3D soundstage.',
         bands: [
             { type: 'peaking', freq: 2500, gain: 3.0, Q: 0.8 },
             { type: 'peaking', freq: 800, gain: 2.0, Q: 1.0 },

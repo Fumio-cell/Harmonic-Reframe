@@ -57,10 +57,10 @@ const App: React.FC = () => {
 
     const getFileInfo = (): string | null => {
         if (!audioBuffer) return null;
-        const ch = audioBuffer.numberOfChannels === 1 ? 'モノラル' : 'ステレオ';
+        const ch = audioBuffer.numberOfChannels === 1 ? 'Mono' : 'Stereo';
         const dur = audioBuffer.duration.toFixed(1);
         const sr = (audioBuffer.sampleRate / 1000).toFixed(1);
-        return `${ch} | ${sr}kHz | ${dur}秒`;
+        return `${ch} | ${sr}kHz | ${dur}s`;
     };
 
     const getParams = (): ConversionParams => ({
@@ -76,7 +76,7 @@ const App: React.FC = () => {
 
             setAppState('processing');
             setProgress(0);
-            setStage('準備中...');
+            setStage('Initializing...');
 
             const worker = new Worker(
                 new URL('./workers/converterWorker.ts', import.meta.url),
@@ -104,7 +104,7 @@ const App: React.FC = () => {
                     setAppState('done');
                     worker.terminate();
                 } else if (msg.type === 'error') {
-                    alert(`エラー: ${msg.message}`);
+                    alert(`Error: ${msg.message}`);
                     setAppState('loaded');
                     worker.terminate();
                 }
@@ -213,7 +213,7 @@ const App: React.FC = () => {
 
                 {/* Footer */}
                 <footer className="footer">
-                    Harmonic Reframe — クライアントサイドオーディオプロセッシング
+                    Harmonic Reframe — Client-side Audio Processing
                 </footer>
             </main>
         </div>

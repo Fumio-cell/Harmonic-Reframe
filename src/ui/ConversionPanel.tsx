@@ -24,7 +24,7 @@ const ConversionPanel: React.FC<ConversionPanelProps> = ({
     return (
         <div className="card fade-up">
             <div className="card-title">
-                <span className="icon">🎵</span> ピッチ変換
+                <span className="icon">🎵</span> Pitch Conversion
             </div>
 
             <div className="pitch-row">
@@ -32,12 +32,12 @@ const ConversionPanel: React.FC<ConversionPanelProps> = ({
                     className={`pitch-toggle ${enabled ? 'on' : ''}`}
                     onClick={onToggle}
                     disabled={disabled}
-                    aria-label="ピッチ変換の切替"
+                    aria-label="Toggle Pitch Conversion"
                 >
                     <div className="knob" />
                 </button>
                 <span className="pitch-label">
-                    440Hz → {targetPitch}Hz に変換 {enabled ? '✓' : ''}
+                    440Hz → {targetPitch}Hz Conversion {enabled ? '✓' : ''}
                 </span>
             </div>
 
@@ -57,7 +57,7 @@ const ConversionPanel: React.FC<ConversionPanelProps> = ({
                     </div>
 
                     <div className="custom-pitch">
-                        <span>カスタム:</span>
+                        <span>Custom:</span>
                         <input
                             type="number"
                             min={400}
@@ -70,7 +70,7 @@ const ConversionPanel: React.FC<ConversionPanelProps> = ({
                     </div>
 
                     <div className="ratio-info">
-                        比率: ×{(targetPitch / 440).toFixed(6)}（
+                        Ratio: ×{(targetPitch / 440).toFixed(6)}（
                         {((targetPitch / 440 - 1) * 100).toFixed(2)}%）
                     </div>
                 </>
