@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { supabase, openLemonSqueezyCheckout } from '../lib/commercial';
-import { LogIn, LogOut, Zap, Activity } from 'lucide-react';
+import { LogIn, LogOut, Zap, Activity, Info, X } from 'lucide-react';
 
 export const Header: React.FC = () => {
     const [user, setUser] = useState<any>(null);
     const [isPro, setIsPro] = useState(false);
+    const [showInfo, setShowInfo] = useState(false);
 
     useEffect(() => {
         const client = supabase;
@@ -67,6 +68,9 @@ export const Header: React.FC = () => {
                 </div>
                 <div className="app-separator">/</div>
                 <div className="app-name">Harmonic Reframe</div>
+                <button onClick={() => setShowInfo(true)} className="info-btn">
+                    <Info className="w-4 h-4" />
+                </button>
             </div>
 
             <div className="header-right">
@@ -221,7 +225,61 @@ export const Header: React.FC = () => {
                     color: #fff;
                     background: rgba(255, 255, 255, 0.1);
                 }
-            `}</style>
+            `}
+                .info-modal-overlay {
+                    position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+                    background: rgba(0,0,0,0.75); backdrop-filter: blur(8px);
+                    display: flex; align-items: center; justify-content: center; z-index: 99999;
+                }
+                .info-modal {
+                    background: #111827; border: 1px solid rgba(255,255,255,0.1);
+                    border-radius: 16px; padding: 32px; max-width: 600px;
+                    width: 90%; max-height: 85vh; overflow-y: auto;
+                    box-shadow: 0 25px 50px -12px rgba(0,0,0,0.5);
+                    position: relative;
+                    text-align: left;
+                }
+                .info-modal h2 { margin-top: 0; color: #f8fafc; font-size: 1.5rem; }
+                .info-modal h3 { color: #38bdf8; font-size: 0.85rem; margin-bottom: 24px; font-weight: 600; }
+                .info-modal p { color: #cbd5e1; line-height: 1.6; font-size: 0.9rem; margin-bottom: 12px; }
+                .info-modal ul { color: #cbd5e1; font-size: 0.85rem; padding-left: 20px; list-style-type: none; margin:0; padding:0; }
+                .info-modal li { margin-bottom: 8px; font-weight: 500; color: #94a3b8; }
+                .info-close {
+                    position: absolute; top: 16px; right: 16px;
+                    background: transparent; border: none; color: #64748b;
+                    cursor: pointer; padding: 6px; border-radius: 6px; transition: all 0.2s;
+                }
+                .info-close:hover { color: #f8fafc; background: rgba(255,255,255,0.1); }
+                .info-btn {
+                    background: transparent; border: none; color: #64748b; cursor: pointer;
+                    display: flex; align-items: center; justify-content: center;
+                    margin-left: 12px; transition: color 0.2s;
+                }
+                .info-btn:hover { color: #f8fafc; }
+    
+            </style>
+        
+            {showInfo && (
+                <div className="info-modal-overlay" onClick={() => setShowInfo(false)}>
+                    <div className="info-modal" onClick={e => e.stopPropagation()}>
+                        <button className="info-close" onClick={() => setShowInfo(false)}><X className="w-5 h-5"/></button>
+                        <h2>Harmonic Reframe</h2>
+                        <h3>Solfeggio & Harmonic Spatial Audio Processor | ソルフェジオ＆ハーモニック立体音響プロセッサー</h3>
+                        
+                        <div style={{ marginBottom: '24px' }}>
+                            <div style={{ display: 'inline-block', background: 'rgba(255,255,255,0.1)', padding: '2px 8px', borderRadius: '4px', fontSize: '10px', fontWeight: 'bold', marginBottom: '8px' }}>EN</div>
+                            <p>Harmonic Reframe is a transformative audio tool that retunes standard music (typically A=440Hz) into natural healing frequencies such as 432Hz or 528Hz (Solfeggio frequency). In addition to pitch reframing, the tool significantly enhances spatial presence via mid/side stereo expansion, offering an oceanic, wide-stereo field. It empowers audio creators and listeners to "reframe" their auditory environment to align with mathematical harmony.</p>
+                            <ul><li>Key Features: 432Hz / 528Hz Retuning, Real-time Pitch Shifting, Mid/Side Stereo Expansion, Waveform Visualizer.</li></ul>
+                        </div>
+
+                        <div>
+                            <div style={{ display: 'inline-block', background: 'rgba(255,255,255,0.1)', padding: '2px 8px', borderRadius: '4px', fontSize: '10px', fontWeight: 'bold', marginBottom: '8px' }}>JP</div>
+                            <p>Harmonic Reframeは、一般的な音楽（A=440Hz）を、自然界の調和や癒しをもたらすとされる「432Hz」や「528Hz（ソルフェジオ周波数）」へとピッチ単位で再チューニングする革新的なプロセッサーです。ピッチ変換に加え、Mid/Side処理によるステレオ空間の拡張機能（Stereo Width）を備えており、音源をより深く、広大な音の海へと引き上げます。日常のリスニング環境を、より数学的・自然本来のハーモニーへと再構築（リフレーム）するためのツールです。</p>
+                            <ul><li>主要機能: 432Hz / 528Hzなどへのリアルタイム・リチューニング、Mid/Sideステレオ拡張、高品質オーディオエクスポート。</li></ul>
+                        </div>
+                    </div>
+                </div>
+            )}
         </header>
     );
 };
