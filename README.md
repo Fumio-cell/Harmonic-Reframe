@@ -1,73 +1,14 @@
-# React + TypeScript + Vite
+# Harmonic-Reframe
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+**Solfeggio & Harmonic Spatial Audio Processor** | **ソルフェジオ＆ハーモニック立体音響プロセッサー**
 
-Currently, two official plugins are available:
+### [ English ]
+Harmonic Reframe is a transformative audio tool that retunes standard music (typically A=440Hz) into natural healing frequencies such as 432Hz or 528Hz (Solfeggio frequency). In addition to pitch reframing, the tool significantly enhances spatial presence via mid/side stereo expansion, offering an oceanic, wide-stereo field. It empowers audio creators and listeners to "reframe" their auditory environment to align with mathematical harmony.
+*   **Key Features:** 432Hz / 528Hz Retuning, Real-time Pitch Shifting, Mid/Side Stereo Expansion, Waveform Visualizer.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+### [ 日本語 ]
+Harmonic Reframeは、一般的な音楽（A=440Hz）を、自然界の調和や癒しをもたらすとされる「432Hz」や「528Hz（ソルフェジオ周波数）」へとピッチ単位で再チューニングする革新的なプロセッサーです。ピッチ変換に加え、Mid/Side処理によるステレオ空間の拡張機能（Stereo Width）を備えており、音源をより深く、広大な音の海へと引き上げます。日常のリスニング環境を、より数学的・自然本来のハーモニーへと再構築（リフレーム）するためのツールです。
+*   **主要機能:** 432Hz / 528Hzなどへのリアルタイム・リチューニング、Mid/Sideステレオ拡張、高品質オーディオエクスポート。
 
-## React Compiler
-
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
-
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
-
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
-
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+---
+*Part of the Poetic Signal Toolkit*
