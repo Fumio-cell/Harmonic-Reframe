@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { createPortal } from 'react-dom';
 import { supabase, openLemonSqueezyCheckout } from '../lib/commercial';
-import { LogIn, LogOut, Zap, Activity, Info, X } from 'lucide-react';
+import { LogIn, LogOut, Zap, Info, X } from 'lucide-react';
 
 export const Header: React.FC = () => {
     const [user, setUser] = useState<any>(null);
@@ -68,7 +68,7 @@ export const Header: React.FC = () => {
         <header className="toolkit-header">
             <div className="header-left">
                 <div className="toolkit-brand">
-                    <Activity className="brand-icon" />
+                    <svg className="brand-icon" viewBox="0 0 48 48" fill="none"><circle cx="24" cy="24" r="18" stroke="#7c5cfc" strokeWidth="1" opacity="0.3"/><circle cx="24" cy="24" r="12" stroke="#7c5cfc" strokeWidth="1.2" opacity="0.5"/><circle cx="24" cy="24" r="6" stroke="#5ce0fc" strokeWidth="1.5" opacity="0.7"/><line x1="24" y1="30" x2="24" y2="40" stroke="#7c5cfc" strokeWidth="1.5" strokeLinecap="round"/><path d="M21 14 L21 26 Q21 28 24 28 Q27 28 27 26 L27 14" stroke="#7c5cfc" strokeWidth="1.5" fill="none" strokeLinecap="round"/></svg>
                     <span className="toolkit-name">Poetic Signal Toolkit</span>
                 </div>
                 <div className="app-separator">/</div>
@@ -126,7 +126,7 @@ export const Header: React.FC = () => {
                     display: flex;
                     align-items: center;
                     gap: 0.5rem;
-                    color: #38bdf8;
+                    color: #7c5cfc;
                 }
                 .brand-icon {
                     width: 1.25rem;
@@ -245,7 +245,7 @@ export const Header: React.FC = () => {
                     text-align: left;
                 }
                 .info-modal h2 { margin-top: 0; color: #f8fafc; font-size: 1.5rem; }
-                .info-modal h3 { color: #38bdf8; font-size: 0.85rem; margin-bottom: 24px; font-weight: 600; }
+                .info-modal h3 { color: #7c5cfc; font-size: 0.85rem; margin-bottom: 24px; font-weight: 600; }
                 .info-modal p { color: #cbd5e1; line-height: 1.6; font-size: 0.9rem; margin-bottom: 12px; }
                 .info-modal ul { color: #cbd5e1; font-size: 0.85rem; padding-left: 20px; list-style-type: none; margin:0; padding:0; }
                 .info-modal li { margin-bottom: 8px; font-weight: 500; color: #94a3b8; }

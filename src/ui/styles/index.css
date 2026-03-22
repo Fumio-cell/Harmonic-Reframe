@@ -6,11 +6,11 @@
     --bg-card: rgba(17, 24, 39, 0.75);
     --bg-card-hover: rgba(26, 35, 50, 0.85);
 
-    --accent: #8b5cf6;
-    --accent-hover: #a78bfa;
-    --accent-glow: rgba(139, 92, 246, 0.35);
-    --accent2: #06b6d4;
-    --accent-gradient: linear-gradient(135deg, #8b5cf6, #06b6d4);
+    --accent: #7c5cfc;
+    --accent-hover: #9b7dff;
+    --accent-glow: rgba(124, 92, 252, 0.35);
+    --accent2: #5ce0fc;
+    --accent-gradient: linear-gradient(135deg, #7c5cfc, #5ce0fc);
     --accent-gradient-warm: linear-gradient(135deg, #f59e0b, #ef4444);
 
     --text: #f1f5f9;
