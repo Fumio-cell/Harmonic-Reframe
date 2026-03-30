@@ -67,6 +67,21 @@ body {
     margin: 0 auto;
     padding: 40px 24px 60px;
     width: 100%;
+    transition: max-width 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.app.app--split {
+    max-width: 1100px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+    align-items: start;
+}
+
+.app__left,
+.app__right {
+    display: flex;
+    flex-direction: column;
 }
 
 /* ===== Header ===== */
@@ -619,6 +634,7 @@ body {
 
 /* ===== Footer ===== */
 .footer {
+    grid-column: 1 / -1;
     text-align: center;
     padding: 32px 0;
     color: var(--text-muted);
@@ -725,5 +741,12 @@ body {
 
     .pitch-presets {
         grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+@media (max-width: 900px) {
+    .app.app--split {
+        grid-template-columns: 1fr;
+        max-width: 720px;
     }
 }

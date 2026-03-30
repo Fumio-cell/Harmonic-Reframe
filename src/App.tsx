@@ -155,60 +155,62 @@ const App: React.FC = () => {
     return (
         <div className="app-container">
             <Header />
-            <main className="app">
-                {/* File Drop */}
-                <div className="card">
-                    <FileDropZone
-                        onFileLoad={handleFileLoad}
-                        fileName={fileName}
-                        fileInfo={getFileInfo()}
-                        onClear={handleClear}
-                    />
-                    <WaveformPreview audioBuffer={audioBuffer} />
+            <main className={`app ${appState !== 'idle' ? 'app--split' : ''}`}>
+                <div className="app__left">
+                    {/* File Drop */}
+                    <div className="card">
+                        <FileDropZone
+                            onFileLoad={handleFileLoad}
+                            fileName={fileName}
+                            fileInfo={getFileInfo()}
+                            onClear={handleClear}
+                        />
+                        <WaveformPreview audioBuffer={audioBuffer} />
+                    </div>
+
+                    {/* Playback Controls */}
+                    {appState !== 'idle' && (
+                        <PlaybackControls
+                            audioBuffer={audioBuffer}
+                            convertedChannels={convertedChannels}
+                            convertedSampleRate={convertedSampleRate}
+                        />
+                    )}
+
+                    {/* Export */}
+                    {appState !== 'idle' && (
+                        <ExportButton
+                            processing={processing}
+                            progress={progress}
+                            stage={stage}
+                            canExport={appState === 'loaded' || appState === 'done'}
+                            onConvert={handleConvert}
+                            onPreview={handleConvertOnly}
+                            isPro={isPro}
+                            duration={audioBuffer?.duration || 0}
+                        />
+                    )}
                 </div>
 
-                {/* Playback Controls */}
                 {appState !== 'idle' && (
-                    <PlaybackControls
-                        audioBuffer={audioBuffer}
-                        convertedChannels={convertedChannels}
-                        convertedSampleRate={convertedSampleRate}
-                    />
-                )}
+                    <div className="app__right">
+                        {/* Conversion Panel */}
+                        <ConversionPanel
+                            enabled={retuneEnabled}
+                            targetPitch={targetPitch}
+                            onToggle={() => setRetuneEnabled(!retuneEnabled)}
+                            onTargetChange={setTargetPitch}
+                            disabled={processing}
+                        />
 
-                {/* Conversion Panel */}
-                {appState !== 'idle' && (
-                    <ConversionPanel
-                        enabled={retuneEnabled}
-                        targetPitch={targetPitch}
-                        onToggle={() => setRetuneEnabled(!retuneEnabled)}
-                        onTargetChange={setTargetPitch}
-                        disabled={processing}
-                    />
-                )}
-
-                {/* Enhancer Panel */}
-                {appState !== 'idle' && (
-                    <EnhancerPanel
-                        preset={enhancePreset}
-                        onPresetChange={setEnhancePreset}
-                        disabled={processing}
-                        isPro={isPro}
-                    />
-                )}
-
-                {/* Export */}
-                {appState !== 'idle' && (
-                    <ExportButton
-                        processing={processing}
-                        progress={progress}
-                        stage={stage}
-                        canExport={appState === 'loaded' || appState === 'done'}
-                        onConvert={handleConvert}
-                        onPreview={handleConvertOnly}
-                        isPro={isPro}
-                        duration={audioBuffer?.duration || 0}
-                    />
+                        {/* Enhancer Panel */}
+                        <EnhancerPanel
+                            preset={enhancePreset}
+                            onPresetChange={setEnhancePreset}
+                            disabled={processing}
+                            isPro={isPro}
+                        />
+                    </div>
                 )}
 
                 {/* Footer */}
