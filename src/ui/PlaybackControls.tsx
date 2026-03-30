@@ -170,7 +170,7 @@ const PlaybackControls: React.FC<PlaybackControlsProps> = ({
     const progressPct = duration > 0 ? (currentTime / duration) * 100 : 0;
 
     return (
-        <div className="card fade-up">
+        <div className="card fade-up h-full flex flex-col justify-between">
             <div className="card-title">
                 <span className="icon">🎧</span> Playback Preview
                 <span className="shortcut-hint">Space: Play/Pause · Esc: Stop</span>

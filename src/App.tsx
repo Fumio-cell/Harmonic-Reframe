@@ -157,8 +157,8 @@ const App: React.FC = () => {
             <Header />
             <main className={`app ${appState !== 'idle' ? 'app--split' : ''}`}>
                 <div className="app__left">
-                    {/* File Drop */}
-                    <div className="card">
+                    {/* File Drop and Waveform */}
+                    <div className="card flex-1 flex flex-col justify-center">
                         <FileDropZone
                             onFileLoad={handleFileLoad}
                             fileName={fileName}
@@ -168,17 +168,44 @@ const App: React.FC = () => {
                         <WaveformPreview audioBuffer={audioBuffer} />
                     </div>
 
-                    {/* Playback Controls */}
+                    {/* Conversion Panel */}
                     {appState !== 'idle' && (
-                        <PlaybackControls
-                            audioBuffer={audioBuffer}
-                            convertedChannels={convertedChannels}
-                            convertedSampleRate={convertedSampleRate}
-                        />
+                        <div className="flex-1 flex flex-col">
+                            <ConversionPanel
+                                enabled={retuneEnabled}
+                                targetPitch={targetPitch}
+                                onToggle={() => setRetuneEnabled(!retuneEnabled)}
+                                onTargetChange={setTargetPitch}
+                                disabled={processing}
+                            />
+                        </div>
                     )}
 
-                    {/* Export */}
+                    {/* Enhancer Panel */}
                     {appState !== 'idle' && (
+                        <div className="flex-1 flex flex-col">
+                            <EnhancerPanel
+                                preset={enhancePreset}
+                                onPresetChange={setEnhancePreset}
+                                disabled={processing}
+                                isPro={isPro}
+                            />
+                        </div>
+                    )}
+                </div>
+
+                {appState !== 'idle' && (
+                    <div className="app__right">
+                        {/* Playback Controls */}
+                        <div className="flex-1 flex flex-col">
+                            <PlaybackControls
+                                audioBuffer={audioBuffer}
+                                convertedChannels={convertedChannels}
+                                convertedSampleRate={convertedSampleRate}
+                            />
+                        </div>
+
+                        {/* Export Sector (Run Conversion + Save as WAV) */}
                         <ExportButton
                             processing={processing}
                             progress={progress}
@@ -188,27 +215,6 @@ const App: React.FC = () => {
                             onPreview={handleConvertOnly}
                             isPro={isPro}
                             duration={audioBuffer?.duration || 0}
-                        />
-                    )}
-                </div>
-
-                {appState !== 'idle' && (
-                    <div className="app__right">
-                        {/* Conversion Panel */}
-                        <ConversionPanel
-                            enabled={retuneEnabled}
-                            targetPitch={targetPitch}
-                            onToggle={() => setRetuneEnabled(!retuneEnabled)}
-                            onTargetChange={setTargetPitch}
-                            disabled={processing}
-                        />
-
-                        {/* Enhancer Panel */}
-                        <EnhancerPanel
-                            preset={enhancePreset}
-                            onPresetChange={setEnhancePreset}
-                            disabled={processing}
-                            isPro={isPro}
                         />
                     </div>
                 )}

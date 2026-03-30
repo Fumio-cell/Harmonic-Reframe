@@ -26,51 +26,68 @@ const ExportButton: React.FC<ExportButtonProps> = ({
 
     if (processing) {
         return (
-            <div className="card fade-up">
-                <div className="progress-wrap">
-                    <div className="progress-bar-bg">
-                        <div
-                            className="progress-bar-fill"
-                            style={{ width: `${progress}%` }}
-                        />
+            <>
+                <div className="card fade-up flex-1 flex flex-col justify-center">
+                    <div className="progress-wrap m-0">
+                        <div className="progress-bar-bg">
+                            <div
+                                className="progress-bar-fill"
+                                style={{ width: `${progress}%` }}
+                            />
+                        </div>
+                        <div className="progress-stage">{stage}</div>
+                        <div className="progress-pct">{Math.round(progress)}%</div>
                     </div>
-                    <div className="progress-stage">{stage}</div>
-                    <div className="progress-pct">{Math.round(progress)}%</div>
                 </div>
-            </div>
+                <div className="card fade-up flex-1 flex flex-col">
+                    <div className="card-title">
+                        <span className="icon">💾</span> Output
+                    </div>
+                    <button
+                        className="btn btn-primary"
+                        disabled
+                    >
+                        <Download className="w-4 h-4" /> Save as WAV
+                    </button>
+                </div>
+            </>
         );
     }
 
     return (
-        <div className="card fade-up">
-            <div className="card-title">
-                <span className="icon">💾</span> Output
-            </div>
-
-            <div className="btn-group">
+        <>
+            <div className="card fade-up flex-1 flex flex-col justify-center">
                 <button
-                    className="btn btn-secondary"
+                    className="btn btn-secondary w-full"
                     onClick={onPreview}
                     disabled={!canExport}
                 >
                     <Play className="w-4 h-4" /> Run Conversion
                 </button>
-                <button
-                    className={`btn btn-primary pulse ${isGated ? 'gated-btn' : ''}`}
-                    onClick={onConvert}
-                    disabled={!canExport}
-                >
-                    {isGated ? <Zap className="w-4 h-4" /> : <Download className="w-4 h-4" />}
-                    {isGated ? 'Get PRO to Export Long File' : 'Save as WAV'}
-                </button>
             </div>
-            {isGated && (
-                <p className="gated-tip">
-                    <Zap className="inline w-3 h-3 mr-1" />
-                    Files over 2 minutes require PRO for export.
-                </p>
-            )}
-        </div>
+            
+            <div className="card fade-up flex-1 flex flex-col justify-between">
+                <div className="card-title m-0 mb-3">
+                    <span className="icon">💾</span> Output
+                </div>
+                <div>
+                    <button
+                        className={`btn btn-primary pulse w-full ${isGated ? 'gated-btn' : ''}`}
+                        onClick={onConvert}
+                        disabled={!canExport}
+                    >
+                        {isGated ? <Zap className="w-4 h-4" /> : <Download className="w-4 h-4" />}
+                        {isGated ? 'Get PRO to Export' : 'Save as WAV'}
+                    </button>
+                    {isGated && (
+                        <p className="gated-tip">
+                            <Zap className="inline w-3 h-3 mr-1" />
+                            Over 2m needs PRO
+                        </p>
+                    )}
+                </div>
+            </div>
+        </>
     );
 };
 

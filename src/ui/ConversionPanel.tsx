@@ -22,7 +22,7 @@ const ConversionPanel: React.FC<ConversionPanelProps> = ({
     disabled,
 }) => {
     return (
-        <div className="card fade-up">
+        <div className="card fade-up h-full flex flex-col justify-center">
             <div className="card-title">
                 <span className="icon">🎵</span> Pitch Conversion
             </div>
