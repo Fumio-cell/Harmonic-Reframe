@@ -170,40 +170,34 @@ const App: React.FC = () => {
 
                     {/* Conversion Panel */}
                     {appState !== 'idle' && (
-                        <div className="flex-1 flex flex-col">
-                            <ConversionPanel
-                                enabled={retuneEnabled}
-                                targetPitch={targetPitch}
-                                onToggle={() => setRetuneEnabled(!retuneEnabled)}
-                                onTargetChange={setTargetPitch}
-                                disabled={processing}
-                            />
-                        </div>
+                        <ConversionPanel
+                            enabled={retuneEnabled}
+                            targetPitch={targetPitch}
+                            onToggle={() => setRetuneEnabled(!retuneEnabled)}
+                            onTargetChange={setTargetPitch}
+                            disabled={processing}
+                        />
                     )}
 
                     {/* Enhancer Panel */}
                     {appState !== 'idle' && (
-                        <div className="flex-1 flex flex-col">
-                            <EnhancerPanel
-                                preset={enhancePreset}
-                                onPresetChange={setEnhancePreset}
-                                disabled={processing}
-                                isPro={isPro}
-                            />
-                        </div>
+                        <EnhancerPanel
+                            preset={enhancePreset}
+                            onPresetChange={setEnhancePreset}
+                            disabled={processing}
+                            isPro={isPro}
+                        />
                     )}
                 </div>
 
                 {appState !== 'idle' && (
                     <div className="app__right">
                         {/* Playback Controls */}
-                        <div className="flex-1 flex flex-col">
-                            <PlaybackControls
-                                audioBuffer={audioBuffer}
-                                convertedChannels={convertedChannels}
-                                convertedSampleRate={convertedSampleRate}
-                            />
-                        </div>
+                        <PlaybackControls
+                            audioBuffer={audioBuffer}
+                            convertedChannels={convertedChannels}
+                            convertedSampleRate={convertedSampleRate}
+                        />
 
                         {/* Export Sector (Run Conversion + Save as WAV) */}
                         <ExportButton
