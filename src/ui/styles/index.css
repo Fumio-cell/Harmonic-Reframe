@@ -75,13 +75,14 @@ body {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 24px;
-    align-items: start;
+    align-items: stretch;
 }
 
 .app__left,
 .app__right {
     display: flex;
     flex-direction: column;
+    gap: 24px;
 }
 
 /* ===== Header ===== */
