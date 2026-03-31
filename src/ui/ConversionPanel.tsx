@@ -61,8 +61,8 @@ const ConversionPanel: React.FC<ConversionPanelProps> = ({
                         <span>Custom:</span>
                         <input
                             type="number"
-                            min={400}
-                            max={600}
+                            min={100}
+                            max={1200}
                             value={targetPitch}
                             onChange={(e) => onTargetChange(Number(e.target.value))}
                             disabled={disabled}
