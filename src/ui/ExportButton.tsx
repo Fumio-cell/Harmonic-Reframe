@@ -1,5 +1,4 @@
-import React from 'react';
-import { Zap, Download, Play, FileOutput, FileAudio } from 'lucide-react';
+import { Zap, Download, Play, FileAudio } from 'lucide-react';
 
 interface RunConversionCardProps {
     processing: boolean;
