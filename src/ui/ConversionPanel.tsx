@@ -1,4 +1,5 @@
 import React from 'react';
+import { Settings2 } from 'lucide-react';
 
 interface ConversionPanelProps {
     enabled: boolean;
@@ -24,7 +25,7 @@ const ConversionPanel: React.FC<ConversionPanelProps> = ({
     return (
         <div className="card fade-up h-full flex flex-col justify-center">
             <div className="card-title">
-                <span className="icon">🎵</span> Pitch Conversion
+                <Settings2 className="w-4 h-4 text-accent" /> Pitch Conversion
             </div>
 
             <div className="pitch-row">

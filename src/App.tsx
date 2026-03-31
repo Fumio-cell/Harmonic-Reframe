@@ -7,7 +7,7 @@ import ExportButton from './ui/ExportButton';
 import WaveformPreview from './ui/WaveformPreview';
 import PlaybackControls from './ui/PlaybackControls';
 import { Header } from './ui/Header';
-import { encodeWav } from './audio/encoder';
+import { encodeWav, encodeAif } from './audio/encoder';
 import type { EQPresetName } from './dsp/eqPreset';
 import type { AppState, ConversionParams } from './types/types';
 
@@ -32,6 +32,7 @@ const App: React.FC = () => {
     const [retuneEnabled, setRetuneEnabled] = useState(true);
     const [targetPitch, setTargetPitch] = useState(432);
     const [enhancePreset, setEnhancePreset] = useState<EQPresetName>('natural');
+    const [exportFormat, setExportFormat] = useState<'wav' | 'aif'>('wav');
 
     // Processing state
     const [progress, setProgress] = useState(0);
@@ -129,7 +130,10 @@ const App: React.FC = () => {
         }
 
         runConversion((channels, sampleRate) => {
-            const blob = encodeWav(channels, sampleRate);
+            const blob = exportFormat === 'wav' 
+                ? encodeWav(channels, sampleRate)
+                : encodeAif(channels, sampleRate);
+            
             const url = URL.createObjectURL(blob);
             const a = document.createElement('a');
             a.href = url;
@@ -138,11 +142,12 @@ const App: React.FC = () => {
             const base = fileName?.replace(/\.[^.]+$/, '') || 'output';
             const suffix = retuneEnabled ? `_${targetPitch}Hz` : '';
             const enhance = enhancePreset !== 'off' ? `_${enhancePreset}` : '';
-            a.download = `${base}${suffix}${enhance}.wav`;
+            const ext = exportFormat;
+            a.download = `${base}${suffix}${enhance}.${ext}`;
             a.click();
             URL.revokeObjectURL(url);
         });
-    }, [runConversion, fileName, retuneEnabled, targetPitch, enhancePreset, isPro, audioBuffer]);
+    }, [runConversion, fileName, retuneEnabled, targetPitch, enhancePreset, isPro, audioBuffer, exportFormat]);
 
     const handleConvertOnly = useCallback(() => {
         runConversion(() => {
@@ -209,6 +214,8 @@ const App: React.FC = () => {
                             onPreview={handleConvertOnly}
                             isPro={isPro}
                             duration={audioBuffer?.duration || 0}
+                            format={exportFormat}
+                            onFormatChange={setExportFormat}
                         />
                     </div>
                 )}

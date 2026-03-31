@@ -1,7 +1,7 @@
 import React from 'react';
 import type { EQPresetName } from '../dsp/eqPreset';
 import { EQ_PRESETS } from '../dsp/eqPreset';
-import { Zap } from 'lucide-react';
+import { Zap, Sparkles, Leaf, Sun, Flame, Maximize, CircleOff } from 'lucide-react';
 
 interface EnhancerPanelProps {
     preset: EQPresetName;
@@ -10,12 +10,12 @@ interface EnhancerPanelProps {
     isPro: boolean;
 }
 
-const ICONS: Record<EQPresetName, string> = {
-    off: '⏸️',
-    natural: '🍃',
-    clear: '✨',
-    warm: '🔥',
-    wide: '🎧',
+const ICONS: Record<EQPresetName, React.ReactNode> = {
+    off: <CircleOff className="w-5 h-5" />,
+    natural: <Leaf className="w-5 h-5" />,
+    clear: <Sun className="w-5 h-5" />,
+    warm: <Flame className="w-5 h-5" />,
+    wide: <Maximize className="w-5 h-5" />,
 };
 
 const PRO_PRESETS: EQPresetName[] = ['clear', 'warm', 'wide'];
@@ -42,7 +42,7 @@ const EnhancerPanel: React.FC<EnhancerPanelProps> = ({
     return (
         <div className="card fade-up h-full flex flex-col justify-center">
             <div className="card-title">
-                <span className="icon">🎛️</span> Enhancer
+                <Sparkles className="w-4 h-4 text-accent" /> Enhancer
             </div>
 
             <div className="enhance-grid">

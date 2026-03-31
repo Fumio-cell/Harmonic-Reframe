@@ -1,4 +1,5 @@
 import React, { useState, useRef, useCallback, useEffect } from 'react';
+import { Headphones, Square, Play, Pause } from 'lucide-react';
 
 interface PlaybackControlsProps {
     /** 原音 AudioBuffer */
@@ -172,7 +173,7 @@ const PlaybackControls: React.FC<PlaybackControlsProps> = ({
     return (
         <div className="card fade-up h-full flex flex-col justify-between">
             <div className="card-title">
-                <span className="icon">🎧</span> Playback Preview
+                <Headphones className="w-4 h-4 text-accent" /> Playback Preview
                 <span className="shortcut-hint">Space: Play/Pause · Esc: Stop</span>
             </div>
 
@@ -182,14 +183,14 @@ const PlaybackControls: React.FC<PlaybackControlsProps> = ({
                     className={`ab-btn ${mode === 'original' ? 'active' : ''}`}
                     onClick={() => switchMode('original')}
                 >
-                    🅰️ Original
+                    Original
                 </button>
                 <button
                     className={`ab-btn ${mode === 'converted' ? 'active' : ''}`}
                     onClick={() => switchMode('converted')}
                     disabled={!hasConverted}
                 >
-                    🅱️ Converted
+                    Converted
                 </button>
             </div>
 
@@ -210,14 +211,14 @@ const PlaybackControls: React.FC<PlaybackControlsProps> = ({
             {/* Transport Controls */}
             <div className="transport">
                 <button className="transport-btn" onClick={handleStop} title="Stop (Esc)">
-                    ⏹
+                    <Square className="w-4 h-4 fill-current" />
                 </button>
                 <button
                     className={`transport-btn play-btn ${playing ? 'playing' : ''}`}
                     onClick={togglePlay}
                     title="Play/Pause (Space)"
                 >
-                    {playing ? '⏸' : '▶'}
+                    {playing ? <Pause className="w-5 h-5 fill-current" /> : <Play className="w-5 h-5 fill-current ml-1" />}
                 </button>
             </div>
 

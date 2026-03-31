@@ -1,5 +1,5 @@
 import React from 'react';
-import { Zap, Download, Play } from 'lucide-react';
+import { Zap, Download, Play, FileOutput, FileAudio } from 'lucide-react';
 
 interface ExportButtonProps {
     processing: boolean;
@@ -10,6 +10,8 @@ interface ExportButtonProps {
     onPreview: () => void;
     isPro: boolean;
     duration: number;
+    format: 'wav' | 'aif';
+    onFormatChange: (f: 'wav' | 'aif') => void;
 }
 
 const ExportButton: React.FC<ExportButtonProps> = ({
@@ -21,6 +23,8 @@ const ExportButton: React.FC<ExportButtonProps> = ({
     onPreview,
     isPro,
     duration,
+    format,
+    onFormatChange,
 }) => {
     const isGated = !isPro && duration > 120;
 
@@ -41,13 +45,13 @@ const ExportButton: React.FC<ExportButtonProps> = ({
                 </div>
                 <div className="card fade-up flex-1 flex flex-col">
                     <div className="card-title">
-                        <span className="icon">💾</span> Output
+                        <FileOutput className="w-4 h-4 text-accent" /> Export
                     </div>
                     <button
                         className="btn btn-primary"
                         disabled
                     >
-                        <Download className="w-4 h-4" /> Save as WAV
+                        <Download className="w-4 h-4" /> Save as {format.toUpperCase()}
                     </button>
                 </div>
             </>
@@ -68,8 +72,25 @@ const ExportButton: React.FC<ExportButtonProps> = ({
             
             <div className="card fade-up flex-1 flex flex-col justify-between">
                 <div className="card-title m-0 mb-3">
-                    <span className="icon">💾</span> Output
+                    <FileAudio className="w-4 h-4 text-accent" /> Export
                 </div>
+                
+                {/* Format Selector */}
+                <div className="ab-switch mb-3">
+                    <button 
+                        className={`ab-btn ${format === 'wav' ? 'active' : ''}`}
+                        onClick={() => onFormatChange('wav')}
+                    >
+                        WAV
+                    </button>
+                    <button 
+                        className={`ab-btn ${format === 'aif' ? 'active' : ''}`}
+                        onClick={() => onFormatChange('aif')}
+                    >
+                        AIFF
+                    </button>
+                </div>
+
                 <div>
                     <button
                         className={`btn btn-primary pulse w-full ${isGated ? 'gated-btn' : ''}`}
@@ -77,7 +98,7 @@ const ExportButton: React.FC<ExportButtonProps> = ({
                         disabled={!canExport}
                     >
                         {isGated ? <Zap className="w-4 h-4" /> : <Download className="w-4 h-4" />}
-                        {isGated ? 'Get PRO to Export' : 'Save as WAV'}
+                        {isGated ? 'Get PRO to Export' : `Save as ${format.toUpperCase()}`}
                     </button>
                     {isGated && (
                         <p className="gated-tip">
