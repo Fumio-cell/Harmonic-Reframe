@@ -15,6 +15,18 @@ const PRESETS = [
     { label: '528Hz', value: 528 },
 ];
 
+const SOLFEGGIO_PRESETS = [
+    { freq: 174, label: 'Relief' },
+    { freq: 285, label: 'Heal' },
+    { freq: 396, label: 'Fearless' },
+    { freq: 417, label: 'Change' },
+    { freq: 528, label: 'Miracle' },
+    { freq: 639, label: 'Connect' },
+    { freq: 741, label: 'Solve' },
+    { freq: 852, label: 'Insight' },
+    { freq: 963, label: 'Awake' },
+];
+
 const ConversionPanel: React.FC<ConversionPanelProps> = ({
     enabled,
     targetPitch,
@@ -55,6 +67,23 @@ const ConversionPanel: React.FC<ConversionPanelProps> = ({
                                 440→{p.label}
                             </button>
                         ))}
+                    </div>
+
+                    <div className="solfeggio-section">
+                        <span className="solfeggio-label">Solfeggio Frequencies</span>
+                        <div className="solfeggio-grid">
+                            {SOLFEGGIO_PRESETS.map((p) => (
+                                <button
+                                    key={p.freq}
+                                    className={`solfeggio-btn ${targetPitch === p.freq ? 'active' : ''}`}
+                                    onClick={() => onTargetChange(p.freq)}
+                                    disabled={disabled}
+                                >
+                                    <span className="sol-freq">{p.freq}Hz</span>
+                                    <span className="sol-desc">{p.label}</span>
+                                </button>
+                            ))}
+                        </div>
                     </div>
 
                     <div className="custom-pitch">
