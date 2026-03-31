@@ -12,7 +12,7 @@ interface ConversionPanelProps {
 const PRESETS = [
     { label: '432Hz', value: 432 },
     { label: '444Hz', value: 444 },
-    { label: '442Hz', value: 442 },
+    { label: '528Hz', value: 528 },
 ];
 
 const ConversionPanel: React.FC<ConversionPanelProps> = ({
@@ -62,7 +62,7 @@ const ConversionPanel: React.FC<ConversionPanelProps> = ({
                         <input
                             type="number"
                             min={400}
-                            max={480}
+                            max={600}
                             value={targetPitch}
                             onChange={(e) => onTargetChange(Number(e.target.value))}
                             disabled={disabled}
