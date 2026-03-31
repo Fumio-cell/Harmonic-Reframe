@@ -3,7 +3,7 @@ import './ui/styles/index.css';
 import FileDropZone from './ui/FileDropZone';
 import ConversionPanel from './ui/ConversionPanel';
 import EnhancerPanel from './ui/EnhancerPanel';
-import ExportButton from './ui/ExportButton';
+import { RunConversionCard, ExportCard } from './ui/ExportButton';
 import WaveformPreview from './ui/WaveformPreview';
 import PlaybackControls from './ui/PlaybackControls';
 import { Header } from './ui/Header';
@@ -197,21 +197,27 @@ const App: React.FC = () => {
 
                 {appState !== 'idle' && (
                     <div className="app__right">
-                        {/* Playback Controls */}
+                        {/* 1. Run Conversion Card (Most Important Start) */}
+                        <RunConversionCard
+                            processing={processing}
+                            progress={progress}
+                            stage={stage}
+                            canExport={appState === 'loaded' || appState === 'done'}
+                            onPreview={handleConvertOnly}
+                        />
+
+                        {/* 2. Playback Controls (Middle Review) */}
                         <PlaybackControls
                             audioBuffer={audioBuffer}
                             convertedChannels={convertedChannels}
                             convertedSampleRate={convertedSampleRate}
                         />
 
-                        {/* Export Sector (Run Conversion + Save as WAV) */}
-                        <ExportButton
+                        {/* 3. Export Card (Final Output) */}
+                        <ExportCard
                             processing={processing}
-                            progress={progress}
-                            stage={stage}
                             canExport={appState === 'loaded' || appState === 'done'}
                             onConvert={handleConvert}
-                            onPreview={handleConvertOnly}
                             isPro={isPro}
                             duration={audioBuffer?.duration || 0}
                             format={exportFormat}
