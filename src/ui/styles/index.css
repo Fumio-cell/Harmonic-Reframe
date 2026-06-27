@@ -139,10 +139,9 @@ body {
 }
 
 .card-title {
-    font-size: 0.7rem;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
+    font-family: 'Fraunces', serif;
+    font-size: 0.85rem;
+    font-weight: 500;
     color: var(--text-muted);
     margin-bottom: 16px;
     display: flex;
@@ -722,9 +721,7 @@ body {
   color: #ff6e6e;
   box-shadow: 0 0 15px rgba(255, 60, 60, 0.3);
   transition: all var(--transition);
-  font-weight: 700;
-  letter-spacing: 0.05em;
-  text-transform: uppercase;
+  font-weight: 600;
 }
 
 .btn-run:hover:not(:disabled) {
@@ -835,10 +832,9 @@ body {
 }
 
 .solfeggio-label {
-    font-size: 0.65rem;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
+    font-family: 'Fraunces', serif;
+    font-size: 0.8rem;
+    font-weight: 500;
     color: var(--text-muted);
     margin-bottom: 8px;
     display: block;
@@ -883,9 +879,7 @@ body {
 }
 
 .solfeggio-btn .sol-desc {
-    font-size: 0.5rem;
-    text-transform: uppercase;
-    letter-spacing: 0.02em;
+    font-size: 0.6rem;
     opacity: 0.7;
     margin-top: 1px;
 }
