@@ -1,4 +1,5 @@
-import { Zap, Download, Play, FileAudio } from 'lucide-react';
+import { Download, Play, FileAudio } from 'lucide-react';
+import { DEMO_MODE, DEMO_MAX_SECONDS, BUY_URL } from '../config';
 
 interface RunConversionCardProps {
     processing: boolean;
@@ -50,8 +51,7 @@ interface ExportCardProps {
     processing: boolean;
     canExport: boolean;
     onConvert: () => void;
-    isPro: boolean;
-    duration: number;
+    demoLimited: boolean;
     format: 'wav' | 'aif';
     onFormatChange: (f: 'wav' | 'aif') => void;
 }
@@ -60,13 +60,10 @@ export const ExportCard: React.FC<ExportCardProps> = ({
     processing,
     canExport,
     onConvert,
-    isPro,
-    duration,
+    demoLimited,
     format,
     onFormatChange,
 }) => {
-    const isGated = !isPro && duration > 120;
-
     return (
         <div className="card fade-up h-full flex flex-col justify-between">
             <div className="card-title m-0 mb-3">
@@ -90,17 +87,19 @@ export const ExportCard: React.FC<ExportCardProps> = ({
 
             <div>
                 <button
-                    className={`btn btn-primary pulse w-full ${isGated ? 'gated-btn' : ''}`}
+                    className="btn btn-primary pulse w-full"
                     onClick={onConvert}
                     disabled={!canExport || processing}
                 >
-                    {isGated ? <Zap className="w-4 h-4" /> : <Download className="w-4 h-4" />}
-                    {isGated ? 'Get PRO to Export' : `Save as ${format.toUpperCase()}`}
+                    <Download className="w-4 h-4" />
+                    {DEMO_MODE ? `Export (${DEMO_MAX_SECONDS}s preview)` : `Save as ${format.toUpperCase()}`}
                 </button>
-                {isGated && (
-                    <p className="gated-tip">
-                        <Zap className="inline w-3 h-3 mr-1" />
-                        Over 2m needs PRO
+                {DEMO_MODE && demoLimited && (
+                    <p className="demo-notice">
+                        Demo export is limited to {DEMO_MAX_SECONDS} seconds.{' '}
+                        <a href={BUY_URL} target="_blank" rel="noopener noreferrer">
+                            Get the full version
+                        </a>
                     </p>
                 )}
             </div>

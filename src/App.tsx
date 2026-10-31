@@ -1,4 +1,4 @@
-import React, { useState, useRef, useCallback, useEffect } from 'react';
+import React, { useState, useRef, useCallback } from 'react';
 import './ui/styles/index.css';
 import FileDropZone from './ui/FileDropZone';
 import ConversionPanel from './ui/ConversionPanel';
@@ -10,19 +10,16 @@ import { Header } from './ui/Header';
 import { encodeWav, encodeAif } from './audio/encoder';
 import type { EQPresetName } from './dsp/eqPreset';
 import type { AppState, ConversionParams } from './types/types';
+import { DEMO_MODE, DEMO_MAX_SECONDS } from './config';
+
+const isPro = !DEMO_MODE;
 
 const App: React.FC = () => {
     // Audio state
     const [audioBuffer, setAudioBuffer] = useState<AudioBuffer | null>(null);
     const [fileName, setFileName] = useState<string | null>(null);
     const [appState, setAppState] = useState<AppState>('idle');
-    const [isPro, setIsPro] = useState(false);
-
-    useEffect(() => {
-        const handleAuth = (e: any) => setIsPro(e.detail.isPro);
-        window.addEventListener('auth:status', handleAuth as EventListener);
-        return () => window.removeEventListener('auth:status', handleAuth as EventListener);
-    }, []);
+    const [demoLimited, setDemoLimited] = useState(false);
 
     // Converted audio (for A/B playback)
     const [convertedChannels, setConvertedChannels] = useState<Float32Array[] | null>(null);
@@ -46,6 +43,7 @@ const App: React.FC = () => {
         setAppState('loaded');
         setConvertedChannels(null);
         setConvertedSampleRate(null);
+        setDemoLimited(false);
     }, []);
 
     const handleClear = useCallback(() => {
@@ -54,6 +52,7 @@ const App: React.FC = () => {
         setAppState('idle');
         setConvertedChannels(null);
         setConvertedSampleRate(null);
+        setDemoLimited(false);
     }, []);
 
     const getFileInfo = (): string | null => {
@@ -122,17 +121,17 @@ const App: React.FC = () => {
     );
 
     const handleConvert = useCallback(() => {
-        if (!isPro && (audioBuffer?.duration || 0) > 120) {
-            if (confirm("Files longer than 2 minutes require PRO for export. Would you like to upgrade?")) {
-                window.dispatchEvent(new CustomEvent('app:buyPro'));
-            }
-            return;
-        }
+        setDemoLimited(false);
 
         runConversion((channels, sampleRate) => {
-            const blob = exportFormat === 'wav' 
-                ? encodeWav(channels, sampleRate)
-                : encodeAif(channels, sampleRate);
+            // Demo builds export only the first DEMO_MAX_SECONDS; preview playback keeps the full length.
+            const maxSamples = DEMO_MAX_SECONDS * sampleRate;
+            const truncated = DEMO_MODE && channels.some((ch) => ch.length > maxSamples);
+            const output = truncated ? channels.map((ch) => ch.subarray(0, maxSamples)) : channels;
+
+            const blob = exportFormat === 'wav'
+                ? encodeWav(output, sampleRate)
+                : encodeAif(output, sampleRate);
             
             const url = URL.createObjectURL(blob);
             const a = document.createElement('a');
@@ -146,8 +145,10 @@ const App: React.FC = () => {
             a.download = `${base}${suffix}${enhance}.${ext}`;
             a.click();
             URL.revokeObjectURL(url);
+
+            if (truncated) setDemoLimited(true);
         });
-    }, [runConversion, fileName, retuneEnabled, targetPitch, enhancePreset, isPro, audioBuffer, exportFormat]);
+    }, [runConversion, fileName, retuneEnabled, targetPitch, enhancePreset, exportFormat]);
 
     const handleConvertOnly = useCallback(() => {
         runConversion(() => {
@@ -218,8 +219,7 @@ const App: React.FC = () => {
                             processing={processing}
                             canExport={appState === 'loaded' || appState === 'done'}
                             onConvert={handleConvert}
-                            isPro={isPro}
-                            duration={audioBuffer?.duration || 0}
+                            demoLimited={demoLimited}
                             format={exportFormat}
                             onFormatChange={setExportFormat}
                         />

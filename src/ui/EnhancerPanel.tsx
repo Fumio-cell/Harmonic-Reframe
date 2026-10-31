@@ -31,9 +31,7 @@ const EnhancerPanel: React.FC<EnhancerPanelProps> = ({
 
     const handlePresetClick = (name: EQPresetName) => {
         if (!isPro && PRO_PRESETS.includes(name)) {
-            if (confirm(`${EQ_PRESETS[name].label} enhancer is a PRO feature. Would you like to upgrade?`)) {
-                window.dispatchEvent(new CustomEvent('app:buyPro'));
-            }
+            confirm(`${EQ_PRESETS[name].label} enhancer is a PRO feature. Would you like to upgrade?`);
             return;
         }
         onPresetChange(name);
