@@ -1,6 +1,7 @@
 import React from 'react';
 import type { EQPresetName } from '../dsp/eqPreset';
 import { EQ_PRESETS } from '../dsp/eqPreset';
+import { BUY_URL } from '../config';
 import { Zap, Sparkles, Leaf, Sun, Flame, Maximize, CircleOff } from 'lucide-react';
 
 interface EnhancerPanelProps {
@@ -31,7 +32,9 @@ const EnhancerPanel: React.FC<EnhancerPanelProps> = ({
 
     const handlePresetClick = (name: EQPresetName) => {
         if (!isPro && PRO_PRESETS.includes(name)) {
-            confirm(`${EQ_PRESETS[name].label} enhancer is a PRO feature. Would you like to upgrade?`);
+            if (confirm(`${EQ_PRESETS[name].label} enhancer is a PRO feature. Would you like to upgrade?`)) {
+                window.open(BUY_URL, '_blank', 'noopener,noreferrer');
+            }
             return;
         }
         onPresetChange(name);
