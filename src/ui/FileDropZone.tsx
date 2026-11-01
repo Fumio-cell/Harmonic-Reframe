@@ -1,4 +1,5 @@
 import React, { useRef, useCallback } from 'react';
+import { decodeAudioFile } from '../lib/audio/decodeAudioFile';
 
 interface FileDropZoneProps {
     onFileLoad: (buffer: AudioBuffer, name: string) => void;
@@ -20,10 +21,10 @@ const FileDropZone: React.FC<FileDropZoneProps> = ({
             const arrayBuffer = await file.arrayBuffer();
             const audioCtx = new AudioContext();
             try {
-                const buffer = await audioCtx.decodeAudioData(arrayBuffer);
+                const buffer = await decodeAudioFile(audioCtx, arrayBuffer);
                 onFileLoad(buffer, file.name);
-            } catch {
-                alert('Unsupported file format. Please try WAV, MP3, AIFF, or M4A.');
+            } catch (e) {
+                alert(`Failed to decode audio file (${e instanceof Error ? e.message : String(e)})`);
             } finally {
                 audioCtx.close();
             }
@@ -86,7 +87,7 @@ const FileDropZone: React.FC<FileDropZoneProps> = ({
             <input
                 ref={inputRef}
                 type="file"
-                accept="audio/*"
+                accept="audio/*,audio/aiff,audio/x-aiff,.aif,.aiff,.aifc"
                 style={{ display: 'none' }}
                 onChange={(e) => {
                     const file = e.target.files?.[0];
